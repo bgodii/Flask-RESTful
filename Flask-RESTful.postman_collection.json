@@ -1,0 +1,233 @@
+{
+	"info": {
+		"_postman_id": "b1aa4bdc-b40d-4624-a78d-057466a40b0c",
+		"name": "Flask-RESTful",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/item",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{LOCAL_HOST}}/item",
+					"host": [
+						"{{LOCAL_HOST}}"
+					],
+					"path": [
+						"item"
+					]
+				},
+				"description": "This should return a list of items, each in JSON format."
+			},
+			"response": []
+		},
+		{
+			"name": "/auth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bd16f6f9-71d6-45d5-b0ac-9fdd17b3cdf4",
+						"exec": [
+							"res = JSON.parse(responseBody);",
+							"console.log(res.access_token)",
+							"pm.collectionVariables.set(\"TOKEN\", res.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"bob\",\n    \"password\": \"asdf\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{LOCAL_HOST}}/auth",
+					"host": [
+						"{{LOCAL_HOST}}"
+					],
+					"path": [
+						"auth"
+					]
+				},
+				"description": "This should return a list of items, each in JSON format."
+			},
+			"response": []
+		},
+		{
+			"name": "/item/<name>",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8aa51a8c-d981-473e-a579-285c199fa197",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{LOCAL_HOST}}/item/gmmk",
+					"host": [
+						"{{LOCAL_HOST}}"
+					],
+					"path": [
+						"item",
+						"gmmk"
+					]
+				},
+				"description": "This should return a list of items, each in JSON format. \n<br/>**No two items may have the same name.**"
+			},
+			"response": []
+		},
+		{
+			"name": "/item/<name>",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"price\": 70.00\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{LOCAL_HOST}}/item/gmmk",
+					"host": [
+						"{{LOCAL_HOST}}"
+					],
+					"path": [
+						"item",
+						"gmmk"
+					]
+				},
+				"description": "This should create a new items.\n<br/>**No two items may have the same name.**"
+			},
+			"response": []
+		},
+		{
+			"name": "/item/<name>",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"price\": 110.00\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{LOCAL_HOST}}/item/gmmk",
+					"host": [
+						"{{LOCAL_HOST}}"
+					],
+					"path": [
+						"item",
+						"gmmk"
+					]
+				},
+				"description": "This should update a item, if item already existe they will create a new items.\n<br/>**No two items may have the same name.**"
+			},
+			"response": []
+		},
+		{
+			"name": "/item/<name>",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{LOCAL_HOST}}/item/gmmk",
+					"host": [
+						"{{LOCAL_HOST}}"
+					],
+					"path": [
+						"item",
+						"gmmk"
+					]
+				},
+				"description": "This should delete a item by name."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "751a3d9f-20e8-41db-a631-ec58d1c1e3c9",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "1b0acbb9-24cc-44b5-b980-2ec9eefdcc88",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "d618b9a5-f695-4470-ab94-22f6152e3879",
+			"key": "LOCAL_HOST",
+			"value": "http://127.0.0.1:5000"
+		},
+		{
+			"id": "9ea332d7-9a80-44e5-97a8-8edc889573fa",
+			"key": "TOKEN",
+			"value": ""
+		}
+	],
+	"protocolProfileBehavior": {}
+}
